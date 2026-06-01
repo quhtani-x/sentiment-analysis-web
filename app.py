@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 # DISCLAIMER , some of the comments has been added by Ai as my code didnt have much comments and i told the Ai to explain the code , also remove dead commented code
-
+ 
 # a web app that guesses if text is positive or negative. it trains a little
 # model when the server starts (tf-idf + logistic regression) and then you can
 # type anything into the page and it scores it live.
