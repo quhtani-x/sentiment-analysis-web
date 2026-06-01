@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sentiment analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="card">
+    <h1>🧠 sentiment analyzer</h1>
+    <p class="sub">type something and see if the model thinks it's positive or negative</p>
+
+    <textarea id="text" placeholder="e.g. i really loved this movie"></textarea>
+
+    <!-- result shows up here, colored by the score -->
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const box = document.getElementById("text");
+    const result = document.getElementById("result");
+
+    // ask the server every time i stop typing for a moment
+    let timer;
+    box.addEventListener("input", () => {
+      clearTimeout(timer);
+      timer = setTimeout(analyze, 400);
+    });
+
+    async function analyze() {
+      const text = box.value;
+      const data = await fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      }).then((r) => r.json());
+
+      // green for positive, red for negative
+      const color = data.label === "positive" ? "#00b894" : "#e74c3c";
+      result.style.color = color;
+      result.textContent = `${data.label}  (${Math.round(data.score * 100)}% positive)`;
+    }
+  </script>
+</body>
+</html>

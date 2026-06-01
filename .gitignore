@@ -1,0 +1,28 @@
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+
+# node
+node_modules/
+
+# generated data / output / models
+*.db
+tasks.json
+links.json
+expenses.csv
+prices.csv
+qr.png
+intruder.jpg
+*.keras
+*.pt
+*.log
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
